@@ -51,8 +51,8 @@
 		A287F46929B69E1C00E5C47B /* LittleLemonResturant */ = {
 			isa = PBXGroup;
 			children = (
-				A287F46A29B69E1C00E5C47B /* LittleLemonResturantApp.swift */,
 				A287F46C29B69E1C00E5C47B /* ContentView.swift */,
+				A287F46A29B69E1C00E5C47B /* LittleLemonResturantApp.swift */,
 				A287F46E29B69E1E00E5C47B /* Assets.xcassets */,
 				A287F47029B69E1E00E5C47B /* Preview Content */,
 			);
