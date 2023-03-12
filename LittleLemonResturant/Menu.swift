@@ -26,6 +26,10 @@ struct Menu: View {
             return NSPredicate(format: "title CONTAINS[cd] %@", searchText)
         }
     }
+    func test() {
+        print("test")
+    }
+    
     func getMenuData() {
         PersistenceController().clear()
         let urlString = "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json"
@@ -56,12 +60,84 @@ struct Menu: View {
     }
     
     var body: some View {
-        
         VStack{
-            Text("Title")
-            Text("Location")
-            Text("This is a short description of the whole application below the two previous fields")
-            TextField("Seach Menu", text: $searchText)
+            VStack{
+                ZStack{
+                    HStack{
+                        Image("LittleLemonLogo").resizable () .aspectRatio (contentMode: .fit).frame(width: 150)
+                    }
+                    HStack{
+                        Spacer()
+                        Image("profile-image-placeholder") .resizable () .aspectRatio (contentMode: .fill) .frame (width: 50, height: 50, alignment: .top) .cornerRadius (100)
+                    }.padding(.trailing)
+                }
+                VStack{
+                    HStack{
+                        VStack(alignment: .leading, spacing: 5.0){
+                            Text("Little Lemon")
+                                .font(Font.custom("American Typewriter", size: 32.0))
+                                .foregroundColor(Color(red: 244/255, green: 206/255, blue: 20/255))
+                                .fontWeight(.semibold)
+                            Text("Chicago")
+                                .font(Font.custom("American Typewriter", size: 24.0))
+                                .foregroundColor(Color(red: 237/255, green: 239/255, blue: 238/255))
+                            Text("We are a family owned Mediterranean restuaurant, focused on traditional recipes served with a modern twist.")
+                                .foregroundColor(Color(red: 237/255, green: 239/255, blue: 238/255))
+                        }.padding()
+                        Spacer()
+                        Image("Hero image").resizable () .aspectRatio (contentMode: .fit) .frame (width: 120, alignment: .top) .cornerRadius (20)
+                            .padding()
+                    }.background(Color(red: 73/255, green: 94/255, blue: 87/255))
+                    HStack {
+                        Spacer(minLength: 20)
+                        HStack (alignment: .center,
+                                spacing: 10) {
+                            Image(systemName: "magnifyingglass")
+                                        .resizable()
+                                        .frame(width: 15, height: 15, alignment: .center)
+                                        .foregroundColor(.gray)
+                                        .frame(minWidth: 0, maxWidth: 15)
+                                        .frame(minHeight: 0, maxHeight: 15)
+                                    TextField ("Search Menu", text: $searchText)
+                        }  // HSTack
+                            .padding([.top,.bottom], 2)
+                            .padding(.leading, 5)
+                            .background(Color.white, alignment: .center)
+                            .cornerRadius(5)
+                        Spacer(minLength: 20)
+                    }.padding(.bottom)
+                }.background(Color(red: 73/255, green: 94/255, blue: 87/255))
+            }
+            VStack(alignment: .leading){
+                Text("ORDER FOR DELIVERY!")
+                    .fontWeight(.bold)
+                HStack{
+                    Button("Starters", action: test).padding()
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                        .foregroundColor(Color(red: 73/255, green: 94/255, blue: 87/255))
+                        .background(Color(red: 237/255, green: 239/255, blue: 238/255))
+                        .cornerRadius(20)
+                    Button("Mains", action: test).padding()
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                        .foregroundColor(Color(red: 73/255, green: 94/255, blue: 87/255))
+                        .background(Color(red: 237/255, green: 239/255, blue: 238/255))
+                        .cornerRadius(20)
+                    Button("Desserts", action: test).padding()
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                        .foregroundColor(Color(red: 73/255, green: 94/255, blue: 87/255))
+                        .background(Color(red: 237/255, green: 239/255, blue: 238/255))
+                        .cornerRadius(20)
+                    Button("Drinks", action: test).padding()
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                        .foregroundColor(Color(red: 73/255, green: 94/255, blue: 87/255))
+                        .background(Color(red: 237/255, green: 239/255, blue: 238/255))
+                        .cornerRadius(20)
+                }
+            }.padding(.top)
             FetchedObjects(predicate: buildPredicate(), sortDescriptors:buildSortDescriptors()) { (dishes: [Dish]) in List(dishes){dishinfo in
                 HStack{
                     Text(dishinfo.title ?? "UNK")
@@ -83,11 +159,5 @@ struct Menu: View {
         .onAppear(){
             getMenuData()
         }
-    }
-}
-
-struct Menu_Previews: PreviewProvider {
-    static var previews: some View {
-        Menu()
     }
 }
