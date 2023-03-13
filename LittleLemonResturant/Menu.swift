@@ -12,7 +12,7 @@ struct Menu: View {
     
     @State var searchText = ""
     @State var categoryText = ""
-    
+    @State var isProfileSetting = false
     
     func buildSortDescriptors() -> [NSSortDescriptor] {
         return [
@@ -23,12 +23,14 @@ struct Menu: View {
         if(searchText.isEmpty && categoryText.isEmpty) {
             return NSPredicate(value: true)
         }
+        /*
         else if(!categoryText.isEmpty && searchText.isEmpty) {
             return NSPredicate(format: "category CONTAINS[cd] %@", categoryText)
         }
         else if(!categoryText.isEmpty && !searchText.isEmpty){
             return NSPredicate(format: "(category CONTAINS[cd] %@) AND (title CONTAINS[cd] %@)", categoryText, searchText)
         }
+         */
         else {
             return NSPredicate(format: "title CONTAINS[cd] %@", searchText)
         }
@@ -44,6 +46,7 @@ struct Menu: View {
     
     func getMenuData() {
         PersistenceController().clear()
+        print("Is running get menu data")
         let urlString = "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json"
         let url = URL(string: urlString)!
         let request = URLRequest(url: url)
@@ -83,7 +86,11 @@ struct Menu: View {
                         }
                         HStack{
                             Spacer()
-                            Image("profile-image-placeholder") .resizable () .aspectRatio (contentMode: .fill) .frame (width: 50, height: 50, alignment: .top) .cornerRadius (100)
+                            Button(action: {
+                              isProfileSetting = true
+                            }) {
+                                Image("profile-image-placeholder") .resizable () .aspectRatio (contentMode: .fill) .frame (width: 50, height: 50, alignment: .top) .cornerRadius (100)
+                            }
                         }.padding(.trailing)
                     }
                     VStack{

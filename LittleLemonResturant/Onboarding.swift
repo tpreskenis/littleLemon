@@ -156,6 +156,9 @@ struct Onboarding: View {
                                     .cornerRadius(20)
                                 Button("Register", action: {
                                     if(!email.isEmpty){
+                                        print(firstName)
+                                        print(lastName)
+                                        print(email)
                                         UserDefaults.standard.set(firstName, forKey: kFirstName)
                                         UserDefaults.standard.set(lastName, forKey: kLastName)
                                         UserDefaults.standard.set(email, forKey: kEmail)
@@ -172,13 +175,39 @@ struct Onboarding: View {
                     }
                 }
                 }.padding()
+                
+                /*
+                TextField("First Name", text: $firstName)
+                TextField("Last Name", text: $lastName)
+                TextField("Email", text: $email)
+                Button("Register") {
+                    if (firstName.isEmpty && lastName.isEmpty && email.isEmpty) {
+                        print("none")
+                    }
+                    else {
+                        UserDefaults.standard.setValue(firstName, forKey: kFirstName)
+                        UserDefaults.standard.setValue(lastName, forKey: kLastName)
+                        UserDefaults.standard.setValue(email, forKey: kEmail)
+                        UserDefaults.standard.setValue(true, forKey: kIsLoggedIn)
+                        isLoggedIn = true
+                        
+                    }
+                }
+                Button("test") {
+                    UserDefaults.standard.setValue(true, forKey: kIsLoggedIn)
+                    isLoggedIn = true
+                }
+                 */
                     
                 Spacer()
+                
+                Text("Little Lemon iOS Capstone")
                 
             }.onAppear(){
                 if(UserDefaults.standard.bool(forKey: kIsLoggedIn)){
                     isLoggedIn = true
                 }
+                
             }
         }
     }
