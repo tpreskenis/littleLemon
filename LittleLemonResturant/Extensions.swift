@@ -7,6 +7,8 @@
 
 import Foundation
 import CoreData
+import UIKit
+
 
 public extension NSManagedObject {
 

@@ -20,7 +20,7 @@ struct Onboarding: View {
     @State var firstNameTrigger = false
     @State var lastNameTrigger = false
     @State var emailTrigger = false
-
+    
     var body: some View {
         NavigationView {
             VStack{
@@ -131,7 +131,7 @@ struct Onboarding: View {
                             Spacer(minLength: 20)
                             HStack (alignment: .center,
                                     spacing: 10) {
-                                Image(systemName: "person.fill")
+                                Image(systemName: "mail.fill")
                                     .resizable()
                                     .frame(width: 15, height: 15, alignment: .center)
                                     .foregroundColor(.gray)
@@ -175,30 +175,6 @@ struct Onboarding: View {
                     }
                 }
                 }.padding()
-                
-                /*
-                TextField("First Name", text: $firstName)
-                TextField("Last Name", text: $lastName)
-                TextField("Email", text: $email)
-                Button("Register") {
-                    if (firstName.isEmpty && lastName.isEmpty && email.isEmpty) {
-                        print("none")
-                    }
-                    else {
-                        UserDefaults.standard.setValue(firstName, forKey: kFirstName)
-                        UserDefaults.standard.setValue(lastName, forKey: kLastName)
-                        UserDefaults.standard.setValue(email, forKey: kEmail)
-                        UserDefaults.standard.setValue(true, forKey: kIsLoggedIn)
-                        isLoggedIn = true
-                        
-                    }
-                }
-                Button("test") {
-                    UserDefaults.standard.setValue(true, forKey: kIsLoggedIn)
-                    isLoggedIn = true
-                }
-                 */
-                    
                 Spacer()
                 
                 Text("Little Lemon iOS Capstone")

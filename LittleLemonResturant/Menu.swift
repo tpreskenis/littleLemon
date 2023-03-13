@@ -9,11 +9,12 @@ import SwiftUI
 
 struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
     @State var searchText = ""
     @State var categoryText = ""
     @State var isProfileSetting = false
-    
+    @State var isRootActive = false
+    @Environment(\.presentationMode) var presentation
+
     func buildSortDescriptors() -> [NSSortDescriptor] {
         return [
             NSSortDescriptor(key: "title", ascending: true, selector:  #selector(NSString.localizedStandardCompare))
@@ -23,14 +24,12 @@ struct Menu: View {
         if(searchText.isEmpty && categoryText.isEmpty) {
             return NSPredicate(value: true)
         }
-        /*
         else if(!categoryText.isEmpty && searchText.isEmpty) {
             return NSPredicate(format: "category CONTAINS[cd] %@", categoryText)
         }
         else if(!categoryText.isEmpty && !searchText.isEmpty){
             return NSPredicate(format: "(category CONTAINS[cd] %@) AND (title CONTAINS[cd] %@)", categoryText, searchText)
         }
-         */
         else {
             return NSPredicate(format: "title CONTAINS[cd] %@", searchText)
         }
@@ -78,6 +77,9 @@ struct Menu: View {
     
     var body: some View {
         ScrollView{
+            NavigationLink(destination: UserProfile(rootIsActive: $isRootActive), isActive: $isProfileSetting){
+                EmptyView()
+            }
             VStack{
                 VStack{
                     ZStack{
@@ -195,6 +197,9 @@ struct Menu: View {
             }
             .onAppear(){
                 getMenuData()
+                if(isRootActive) {
+                    self.presentation.wrappedValue.dismiss()
+                }
             }
         }
     }
